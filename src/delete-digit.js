@@ -11,7 +11,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  * For n = 152, the output should be 52
  *
  */
-function deleteDigit(/* n */) {
+function deleteDigit(n) {
   const variantsArr = [];
   const toStr = n.toString();
   for (let i = 0; i < toStr.length; i++) {
