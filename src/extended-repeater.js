@@ -15,9 +15,51 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-function repeater(/* str, options */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function repeater(str, options) {
+  let result = "";
+
+  result += str;
+
+  if (options.hasOwnProperty("addition")) {
+    let addition = String(options.addition);
+    if (options.hasOwnProperty("additionSeparator")) {
+      addition += String(options.additionSeparator);
+      options.additionRepeatTimes > 1
+        ? (addition = addition
+            .repeat(options.additionRepeatTimes)
+            .slice(0, -options.additionSeparator.length))
+        : (addition = addition.slice(0, -options.additionSeparator.length));
+    } else {
+      addition += "|";
+      options.additionRepeatTimes > 1
+        ? (addition = addition.repeat(options.additionRepeatTimes).slice(0, -1))
+        : (addition = addition.slice(0, -1));
+    }
+
+    result += addition;
+  }
+
+  let wholeRepeat = "";
+
+  if (options.hasOwnProperty("separator")) {
+    result += String(options.separator);
+    if (options.repeatTimes > 1) {
+      wholeRepeat = result
+        .repeat(options.repeatTimes)
+        .slice(0, -options.separator.length);
+    } else {
+      wholeRepeat = result.slice(0, -options.separator.length);
+    }
+  } else {
+    result += "+";
+    if (options.repeatTimes > 1) {
+      wholeRepeat = result.repeat(options.repeatTimes).slice(0, -1);
+    } else {
+      wholeRepeat = result.slice(0, -1);
+    }
+  }
+
+  return wholeRepeat;
 }
 
 module.exports = {
